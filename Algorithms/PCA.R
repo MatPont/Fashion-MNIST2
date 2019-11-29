@@ -40,17 +40,19 @@ plot.PCA(resPCA, choix = "ind", col.ind = label_col, label = "none")
 
 all_pred <- c()
 index <- c()
-for(y in unique(train_y)){
+data_y <- test_y
+data_x <- test_x
+for(y in unique(data_y)){
   conflict <- TRUE
   cpt <- 1
   while(conflict){
-    ind <- which(train_y == y)[cpt]
+    ind <- which(y == data_y)[cpt]
     print(ind)
-    pred <- predict.PCA(resPCA, train_x[ind,])$coord
+    pred <- predict.PCA(resPCA, data_x[ind,])$coord
     temp_pred <- pred[1:2]
     if(! is.null(all_pred)){
       dist <- apply(all_pred, MARGIN=1, function(x) { sqrt(sum((x - temp_pred)^2)) } )
-      conflict <- sum(dist < 1000) != 0
+      conflict <- sum(dist < 1050) != 0
       cpt <- cpt + 1
     }else{
       conflict <- FALSE 
@@ -59,7 +61,7 @@ for(y in unique(train_y)){
   index <- c(index, ind)
   all_pred <- rbind(all_pred, temp_pred)
   print(temp_pred)
-  add.image(pred[1], pred[2], matrix(rev(unlist(train_x[ind,])), nrow=28), image.width = 0.15, col=colors) 
+  add.image(pred[1], pred[2], matrix(rev(unlist(data_x[ind,])), nrow=28), image.width = 0.15, col=colors) 
 }
 
 # index <- c()
@@ -106,7 +108,7 @@ for(i in 1:length(index)){
   layout(matrix(c(1:2), ncol=2))
   temp <- matrix(rev(rec[,i]), nrow = 28)
   image(temp, col = colors)
-  temp <- matrix(rev(as.double(train_x[index[i],])), nrow = 28)
+  temp <- matrix(rev(as.double(data_x[index[i],])), nrow = 28)
   image(temp, col = colors) 
   dev.off()
   #readline(prompt="Press [enter] to continue")
