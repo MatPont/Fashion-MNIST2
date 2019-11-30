@@ -17,6 +17,8 @@ test_x  = load_image_file("../Datasets/t10k-images-idx3-ubyte")
 train_y = as.factor(load_label_file("../Datasets/train-labels-idx1-ubyte"))
 test_y = as.factor(load_label_file("../Datasets/t10k-labels-idx1-ubyte"))
 
+test_x <- test_x / 255.0
+
 #train_xy = cbind(train_x, train_y)
 #test_xy = cbind(test_x, test_y)
 
