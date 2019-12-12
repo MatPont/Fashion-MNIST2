@@ -92,7 +92,7 @@ which(resPCA$eig[,3] <= 80)
 
 rec <- reconst(resPCA, ncp = 23)
 
-#index <- c(2, 17, 6, 4, 20, 9, 19, 7, 24, 1)
+  #index <- c(2, 17, 6, 4, 20, 9, 19, 7, 24, 1)
 
 # Select one obs for each class
 rec <- rec[index,]
