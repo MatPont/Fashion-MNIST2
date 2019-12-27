@@ -23,7 +23,7 @@ test_x <- test_x / 255.0
 #test_xy = cbind(test_x, test_y)
 
 # Compute PCA
-resPCA <- PCA(test_x, scale.unit = FALSE)
+resPCA <- PCA(test_x, scale.unit = TRUE)
 label_col <- test_y
 
 resPCA <- PCA(train_x, scale.unit = FALSE, ncp=50)

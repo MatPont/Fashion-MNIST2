@@ -12,7 +12,7 @@ plot_tsne <- function(tsne){
   kl <- round(tsne$itercosts[length(tsne$itercosts)], digits = 2)
   plot_name <- paste("t-SNE with KL-divergence = ", kl, sep ="")
   plot_name <- NULL
-  plot(tsne$Y, xlab = "Comp. 1", ylab = "Comp. 2", col = colors[train_y], main = plot_name)
+  plot(tsne$Y, xlab = "Comp. 1", ylab = "Comp. 2", col = colors[train_y], main = plot_name, pch=20)
 }
 
 # load images
