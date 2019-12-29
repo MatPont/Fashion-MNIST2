@@ -12,7 +12,7 @@ plot_tsne <- function(tsne){
   kl <- round(tsne$itercosts[length(tsne$itercosts)], digits = 2)
   plot_name <- paste("t-SNE with KL-divergence = ", kl, sep ="")
   plot_name <- NULL
-  plot(tsne$Y, xlab = "Comp. 1", ylab = "Comp. 2", col = colors[train_y], main = plot_name, pch=20)
+  plot(tsne$Y, xlab = "Comp. 1", ylab = "Comp. 2", col = colors[train_y], main = plot_name)
 }
 
 # load images
@@ -26,8 +26,24 @@ test_y = as.factor(load_label_file("../Datasets/t10k-labels-idx1-ubyte"))
 
 train_x_enc = as.matrix(readMat("../Results/ae/ae_encoded.mat")$X)
 
+ae = as.matrix(readMat("../Results/ae/ae_49_encoded.mat")$X)
+ae2 = as.matrix(readMat("../Results/ae/ae_encoded.mat")$X)
+ae3 = as.matrix(readMat("../Results/ae/ae_100_encoded.mat")$X)
+cae = as.matrix(readMat("../Results/ae/cae1_encoded.mat")$X)
+cae2 = as.matrix(readMat("../Results/ae/cae2_encoded.mat")$X)
 
-tsne <- Rtsne(train_x_enc, verbose = TRUE) 
+all_data <- cbind(ae, ae2, ae3, cae, cae2)
+dim(all_data)
+
+
+
+
+
+#################################################
+tsne <- Rtsne(train_x, verbose = TRUE) 
+tsne <- Rtsne(test_x, verbose = TRUE) 
+tsne <- Rtsne(train_x_enc, verbose = TRUE)
+tsne <- Rtsne(all_data, verbose = TRUE) 
 
 dev.off()
 layout(matrix(1:2, nrow=1))
