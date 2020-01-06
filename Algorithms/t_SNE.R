@@ -54,6 +54,7 @@ all_pred <- c()
 index <- c()
 data_y <- train_y
 data_x <- train_x
+threshold <- 15
 for(y in unique(data_y)){
   conflict <- TRUE
   cpt <- 1
@@ -64,7 +65,7 @@ for(y in unique(data_y)){
     temp_pred <- pred[1:2]
     if(! is.null(all_pred)){
       dist <- apply(all_pred, MARGIN=1, function(x) { sqrt(sum((x - temp_pred)^2)) } )
-      conflict <- sum(dist < 15) != 0
+      conflict <- sum(dist < threshold) != 0
       cpt <- cpt + 1
     }else{
       conflict <- FALSE 
